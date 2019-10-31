@@ -1,9 +1,8 @@
 
-pool: 
-  vmimage: "windows-latest"
-
 jobs:
 - job: MyJob
+  pool: 
+    vmimage: "windows-latest"
   displayName: My First Job
   continueOnError: true
   workspace:
