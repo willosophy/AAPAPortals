@@ -1,0 +1,12 @@
+parameters:
+  artifactName: ''
+  environments: []
+  solutionName: ''
+
+jobs:
+- ${{ each environment in parameters.environments }}:
+  - template: export.yml
+    parameters:
+      artifactName: ${{ parameters.artifactName }}
+      environment: ${{ environment }}
+      solutionName: ${{ parameters.solutionName }}
