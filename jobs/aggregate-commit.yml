@@ -1,0 +1,31 @@
+parameters:
+  artifactName: "solution-artifact"
+  solutions: []
+
+jobs:
+  - job: AggregateCommit
+    displayName: "Aggregate Commit"
+
+    pool:
+      vmImage: "windows-latest"
+
+    steps:
+      - download: current
+
+      - ${{ each solution in parameters.solutions }}:
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ solution }}/unpacked"
+              Contents: "**"
+              TargetFolder: "$(Build.SourcesDirectory)/solutions"
+              OverWrite: true
+
+      - task: PowerShell@2
+        inputs:
+          targetType: "inline"
+          script: |
+            cd $(Build.SourcesDirectory)/solutions
+            dir
+
+      - publish: $(Build.SourcesDirectory)/solutions
+        artifact: EXAMPLE-COMMIT

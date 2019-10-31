@@ -1,20 +1,19 @@
-
-jobs:
-- job: MyJob
-  pool: 
-    vmimage: "windows-latest"
-  displayName: My First Job
-  continueOnError: true
-  workspace:
-    clean: outputs
-  steps:
-    - task: PowerAppsToolInstaller@0
-
-    - template: parallel-export.yml
+stages:
+- stage: Export_Solutions
+  jobs:
+    - template: jobs/parallel-export.yml
       parameters:
-         parameters:
-          artifactName: 'solution-artifact'
-          environments: $(Environment)
-          solutionName:
-           - 'CU-Core'
-           - 'CU-Admissions'
+        artifactName: "solution-artifact"
+        environment: $(Environment)
+        solutions:
+          - "CUCore"
+          - "CUAdmissions"
+- stage: Commit_Solutions
+  dependsOn: Export_Solutions
+  jobs:
+  - template: jobs/aggregate-commit.yml
+    parameters:
+      artifactName: "solution-artifact"
+      solutions:
+        - "CUCore"
+        - "CUAdmissions"
