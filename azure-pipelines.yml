@@ -1,7 +1,21 @@
-pool:
-  vmImage: 'windows-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+pool: 
+  vmimage: "windows-latest"
 
+jobs:
+- job: MyJob
+  displayName: My First Job
+  continueOnError: true
+  workspace:
+    clean: outputs
+  steps:
+    - task: PowerAppsToolInstaller@0
+
+    - template: parallel-export.yml
+      parameters:
+         parameters:
+          artifactName: 'solution-artifact'
+          environments: $(Environment)
+          solutionName:
+           - 'CU-Core'
+           - 'CU-Admissions'
