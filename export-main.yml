@@ -1,8 +1,6 @@
 trigger: none
 variables:
-  SolutionName:
-    - CUCore
-    - CUAdmissions
+  SolutionName: CUCore
 
 stages:
   - stage: Export_Solutions
@@ -11,11 +9,12 @@ stages:
         parameters:
           artifactName: "solution-artifact"
           environment: $(Environment)
-          solutions: $(SolutionName)
+          solutions: [$(SolutionName)]
   - stage: Commit_Solutions
     dependsOn: Export_Solutions
     jobs:
       - template: jobs/solution-export/aggregate-commit.yml
         parameters:
           artifactName: "solution-artifact"
-          solutions: $(SolutionName)
+          solutions:
+            - $(SolutionName)
