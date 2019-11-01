@@ -10,6 +10,8 @@ jobs:
     steps:
       - download: current
 
+      - task: PowerAppsToolInstaller@0
+
       # Unpack both managed and unmanaged solution
       - task: PowerAppsUnpackSolution@0
         inputs:
