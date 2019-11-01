@@ -4,9 +4,6 @@ parameters:
 
 jobs:
   - job:
-    dependsOn:
-      - Export_${{ parameters.SolutionName }}_managed
-      - Export_${{ parameters.SolutionName }}_unmanaged
     pool:
       VmImage: "vs2017-win2016"
 
