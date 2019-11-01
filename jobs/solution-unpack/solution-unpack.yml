@@ -12,12 +12,6 @@ jobs:
 
       - task: PowerAppsToolInstaller@0
 
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}/unpacked"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/solutions"
-          OverWrite: true
       - script: |
           New-Item -Path "$(Build.SourcesDirectory)" -Name "solutions" -ItemType "directory"
           Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
