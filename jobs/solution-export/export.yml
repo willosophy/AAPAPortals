@@ -11,6 +11,7 @@ jobs:
     steps:
       - task: PowerAppsToolInstaller@0
 
+      # Could export unmanaged and managed solutiosn via two jobs to make this faster.
       # Export Unmanaged Solution
       - task: PowerAppsExportSolution@0
         inputs:
@@ -23,7 +24,7 @@ jobs:
       - task: PowerAppsExportSolution@0
         inputs:
           SolutionName: "${{ parameters.solutionName }}"
-          SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\packed\${{ parameters.solutionName }}.zip'
+          SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\packed\${{ parameters.solutionName }}_managed.zip'
           PowerAppsEnvironment: "${{ parameters.environment }}"
           Managed: true
         displayName: "Export - ${{ parameters.solutionName }}"
