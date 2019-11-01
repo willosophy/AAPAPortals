@@ -7,15 +7,11 @@ stages:
         parameters:
           artifactName: "solution-artifact"
           environment: $(Environment)
-          solutions:
-            - "CUCore"
-            - "CUAdmissions"
+          solutions: $(SolutionName)
   - stage: Commit_Solutions
     dependsOn: Export_Solutions
     jobs:
       - template: jobs/solution-export/aggregate-commit.yml
         parameters:
           artifactName: "solution-artifact"
-          solutions:
-            - "CUCore"
-            - "CUAdmissions"
+          solutions: $(SolutionName)
