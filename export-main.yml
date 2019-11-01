@@ -9,18 +9,15 @@ stages:
         parameters:
           artifactName: "solution-artifact"
           environment: $(Environment)
-          SolutionsName:
-            - ${{ variables.solutionName }}
+          SolutionsName: ${{ variables.solutionName }}
   - stage: Commit_Solutions
     dependsOn: Export_Solutions
     jobs:
       - template: jobs/solution-unpack/solution-unpack.yml
         parameters:
           artifactName: "solution-artifact"
-          SolutionsName:
-            - ${{ variables.solutionName }}
+          SolutionsName: ${{ variables.solutionName }}
       - template: jobs/solution-export/aggregate-commit.yml
         parameters:
           artifactName: "solution-artifact"
-          solutionName:
-            - ${{ variables.solutionName }}
+          solutionName: ${{ variables.solutionName }}
