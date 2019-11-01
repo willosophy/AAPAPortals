@@ -3,7 +3,7 @@ parameters:
   SolutionName: ""
 
 jobs:
-  - job:
+  - job: Unpack_Solutions
     pool:
       VmImage: "vs2017-win2016"
 

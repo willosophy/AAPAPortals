@@ -3,12 +3,10 @@ parameters:
   solutionName: ""
 
 jobs:
-  - job: AggregateCommit
-    displayName: "Aggregate Commit"
-
+  - job: Aggregate_Commit
     pool:
       vmImage: "vs2017-win2016"
-
+    dependsOn: Unpack_Solutions
     steps:
       - checkout: self
         persistCredentials: true
