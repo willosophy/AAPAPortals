@@ -39,6 +39,9 @@ jobs:
 
       - publish: $(Build.SourcesDirectory)/solutions
         artifact: EXAMPLE-COMMIT
-      # Commit
-      # Push
+
+      - script: |
+          git add .
+          git commit -m "Automated commit of solutions: ${{ join(', ', parameters.solutions) }}"
+          git push
       # TODO ensure project collection build service accounts has contribute permissions
