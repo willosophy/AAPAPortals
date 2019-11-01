@@ -16,7 +16,7 @@ jobs:
       # Reattach to branch (variable)
       # Configure user.name and user.email
       - pwsh: |
-          git checkout ($(Build.SourceBranch) -replace "^refs/heads/", "")
+          git checkout ("$(Build.SourceBranch)" -replace "^refs/heads/", "")
           git config user.name "Test User"
           git config user.email "Test@test.com"
 
