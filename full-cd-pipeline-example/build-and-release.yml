@@ -19,7 +19,7 @@ stages:
     - task: PowerAppsPackSolution@0
       inputs:
         SolutionSourceFolder: '$(Build.SourcesDirectory)\$(SolutionContentDirectory)'
-        SolutionOutputFile: '$(Pipeline.Workspace)\unmanaged-solutions\$(SolutionName)_managed.zip'
+        SolutionOutputFile: '$(Pipeline.Workspace)\packed-solutions\$(SolutionName)_managed.zip'
         SolutionType: Managed
 
     - publish: $(Pipeline.Workspace)\managed-solutions
