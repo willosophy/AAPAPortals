@@ -12,7 +12,7 @@ jobs:
 
       - task: PowerAppsToolInstaller@0
 
-      - script: |
+      - pwsh: |
           New-Item -Path "$(Build.SourcesDirectory)" -Name "solutions" -ItemType "directory"
           Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
           Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
@@ -42,7 +42,7 @@ jobs:
 
       - script: |
           git add .
-          git commit -m "Automated commit of solutions: ${{ join(', ', parameters.solutions) }}"
+          git commit -m "Automated commit of solutions: ${{ parameters.SolutionName }}"
           git push
-        displayName: "Automated commit of solutions: ${{ join(', ', parameters.solutions) }}"
+        displayName: "Automated commit of solutions: ${{ parameters.SolutionName }}"
       # TODO ensure project collection build service accounts has contribute permissions
