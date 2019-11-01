@@ -11,6 +11,7 @@ jobs:
     steps:
       - task: PowerAppsToolInstaller@0
 
+      # Export Unmanaged Solution
       - task: PowerAppsExportSolution@0
         inputs:
           SolutionName: "${{ parameters.solutionName }}"
@@ -18,11 +19,21 @@ jobs:
           PowerAppsEnvironment: "${{ parameters.environment }}"
         displayName: "Export - ${{ parameters.solutionName }}"
 
+      # Export Managed Solution
+      - task: PowerAppsExportSolution@0
+        inputs:
+          SolutionName: "${{ parameters.solutionName }}"
+          SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\packed\${{ parameters.solutionName }}.zip'
+          PowerAppsEnvironment: "${{ parameters.environment }}"
+          Managed: true
+        displayName: "Export - ${{ parameters.solutionName }}"
+
+      # Unpack both managed and unmanaged solution
       - task: PowerAppsUnpackSolution@0
         inputs:
           SolutionInputFile: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\packed\${{ parameters.solutionName }}.zip'
           SolutionTargetFolder: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\unpacked\${{ parameters.solutionName }}'
-          SolutionType: Unmanaged
+          SolutionType: Both
 
       - publish: $(Pipeline.Workspace)/${{ parameters.artifactName }}
         artifact: ${{ parameters.artifactName }}
