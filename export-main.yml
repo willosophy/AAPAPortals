@@ -1,3 +1,5 @@
+trigger: none
+
 stages:
   - stage: Export_Solutions
     jobs:
