@@ -5,7 +5,7 @@ parameters:
   solutionType: ""
 
 jobs:
-  - job: Export_${{ parameters.solutionName }}
+  - job: Export_${{ parameters.solutionName }}_${{ parameters.solutionType }}
     pool:
       vmImage: "vs2017-win2016"
 
