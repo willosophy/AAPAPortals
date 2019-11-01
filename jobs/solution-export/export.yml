@@ -6,7 +6,7 @@ parameters:
 jobs:
   - job: Export_${{ parameters.solutionName }}
     pool:
-      vmImage: "windows-latest"
+      vmImage: "vs2017-win2016"
 
     steps:
       - task: PowerAppsToolInstaller@0

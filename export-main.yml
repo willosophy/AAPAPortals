@@ -1,6 +1,4 @@
 trigger: none
-variables:
-  SolutionName: CUCore
 
 stages:
   - stage: Export_Solutions
@@ -10,7 +8,8 @@ stages:
           artifactName: "solution-artifact"
           environment: $(Environment)
           solutions:
-            - ${{ variables.SolutionName }}
+            - "CUCore"
+            - "CUAdmissions"
   - stage: Commit_Solutions
     dependsOn: Export_Solutions
     jobs:
@@ -18,4 +17,5 @@ stages:
         parameters:
           artifactName: "solution-artifact"
           solutions:
-            - ${{ variables.SolutionName }}
+            - "CUCore"
+            - "CUAdmissions"
