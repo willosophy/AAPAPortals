@@ -16,20 +16,3 @@ jobs:
       environment: ${{ parameters.environment }}
       solutionName: ${{ parameters.SolutionName }}
       solutionType: "Unmanaged"
-  - job:
-    dependsOn: Export_${{ parameters.SolutionName }}
-    pool:
-      VmImage: "vs2017-win2016"
-
-    steps:
-      - download: current
-
-      # Unpack both managed and unmanaged solution
-      - task: PowerAppsUnpackSolution@0
-        inputs:
-          SolutionInputFile: '$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}\packed\${{ parameters.SolutionName }}.zip'
-          SolutionTargetFolder: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\unpacked\${{ parameters.SolutionName }}'
-          SolutionType: Both
-
-      - publish: $(Pipeline.Workspace)/${{ parameters.artifactName }}
-        artifact: ${{ parameters.artifactName }}
