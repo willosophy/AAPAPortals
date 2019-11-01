@@ -19,8 +19,8 @@ jobs:
           TargetFolder: "$(Build.SourcesDirectory)/solutions"
           OverWrite: true
       - script: |
-          Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}\packed\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
-          Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\packed\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
+          Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
+          Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
 
       # Unpack both managed and unmanaged solution
       - task: PowerAppsUnpackSolution@0
