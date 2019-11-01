@@ -1,6 +1,6 @@
 parameters:
   artifactName: "solution-artifact"
-  solutions: []
+  solutionName: ""
 
 jobs:
   - job: AggregateCommit
@@ -23,13 +23,12 @@ jobs:
 
       - download: current
 
-      - ${{ each solution in parameters.solutions }}:
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ solution }}/unpacked"
-              Contents: "**"
-              TargetFolder: "$(Build.SourcesDirectory)/solutions"
-              OverWrite: true
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}/unpacked"
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/solutions"
+          OverWrite: true
 
       - script: |
           git add .
