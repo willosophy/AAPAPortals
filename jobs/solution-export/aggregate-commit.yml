@@ -19,7 +19,7 @@ jobs:
           git checkout ("$(Build.SourceBranch)" -replace "^refs/heads/", "")
           git config user.name "Automated Pipeline Commit"
           git config user.email "PPALM-Exploration-Build-Account"
-        displayName: "Checkout repo and config user"
+        displayName: "Checkout branch and config user"
 
       - download: current
 
