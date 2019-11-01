@@ -9,7 +9,8 @@ stages:
         parameters:
           artifactName: "solution-artifact"
           environment: $(Environment)
-          solutions: [$(SolutionName)]
+          solutions:
+            - ${{ variables.SolutionName }}
   - stage: Commit_Solutions
     dependsOn: Export_Solutions
     jobs:
@@ -17,4 +18,4 @@ stages:
         parameters:
           artifactName: "solution-artifact"
           solutions:
-            - $(SolutionName)
+            - ${{ variables.SolutionName }}
