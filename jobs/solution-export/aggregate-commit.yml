@@ -16,7 +16,7 @@ jobs:
       # Reattach to branch (variable)
       # Configure user.name and user.email
       - script: |
-          git checkout $(Build.SourceBranch)
+          git checkout $(Build.SourceBranchName)
           git config user.name "Test User"
           git config user.email "Test@test.com"
 
