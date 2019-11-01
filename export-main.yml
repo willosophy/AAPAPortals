@@ -1,6 +1,6 @@
 trigger: none
 variables:
-  solutionName: CUCore
+  SolutionName: CUCore
 
 stages:
   - stage: Export_Solutions
@@ -9,15 +9,15 @@ stages:
         parameters:
           artifactName: "solution-artifact"
           environment: $(Environment)
-          SolutionsName: ${{ variables.solutionName }}
+          SolutionName: ${{ variables.SolutionName }}
   - stage: Commit_Solutions
     dependsOn: Export_Solutions
     jobs:
       - template: jobs/solution-unpack/solution-unpack.yml
         parameters:
           artifactName: "solution-artifact"
-          SolutionsName: ${{ variables.solutionName }}
+          SolutionName: ${{ variables.SolutionName }}
       - template: jobs/solution-export/aggregate-commit.yml
         parameters:
           artifactName: "solution-artifact"
-          solutionName: ${{ variables.solutionName }}
+          SolutionName: ${{ variables.SolutionName }}
