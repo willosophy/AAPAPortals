@@ -1,12 +1,35 @@
 parameters:
   artifactName: ""
   environment: ""
-  solutions: []
+  SolutionName: ""
 
 jobs:
-  - ${{ each solution in parameters.solutions }}:
-      - template: export.yml
-        parameters:
-          artifactName: ${{ parameters.artifactName }}-${{ solution }}
-          environment: ${{ parameters.environment }}
-          solutionName: ${{ solution }}
+  - template: export.yml
+    parameters:
+      artifactName: ${{ parameters.artifactName }}-${{ solution }}
+      environment: ${{ parameters.environment }}
+      solutionName: ${{ parameters.SolutionName }}
+      solutionType: "Managed"
+  - template: export.yml
+    parameters:
+      artifactName: ${{ parameters.artifactName }}-${{ solution }}
+      environment: ${{ parameters.environment }}
+      solutionName: ${{ parameters.SolutionName }}
+      solutionType: "Unmanaged"
+  - job:
+    dependsOn: Export_${{ parameters.solutionName }}
+    pool:
+      VmImage: "vs2017-win2016"
+
+    steps:
+      download: current
+
+      # Unpack both managed and unmanaged solution
+      - task: PowerAppsUnpackSolution@0
+        inputs:
+          SolutionInputFile: '$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ solution }}\packed\${{ parameters.solutionName }}.zip'
+          SolutionTargetFolder: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\unpacked\${{ parameters.solutionName }}'
+          SolutionType: Both
+
+      - publish: $(Pipeline.Workspace)/${{ parameters.artifactName }}
+        artifact: ${{ parameters.artifactName }}
