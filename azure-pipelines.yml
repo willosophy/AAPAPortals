@@ -1,19 +1,19 @@
 stages:
-- stage: Export_Solutions
-  jobs:
-    - template: jobs/parallel-export.yml
-      parameters:
-        artifactName: "solution-artifact"
-        environment: $(Environment)
-        solutions:
-          - "CUCore"
-          - "CUAdmissions"
-- stage: Commit_Solutions
-  dependsOn: Export_Solutions
-  jobs:
-  - template: jobs/aggregate-commit.yml
-    parameters:
-      artifactName: "solution-artifact"
-      solutions:
-        - "CUCore"
-        - "CUAdmissions"
+  - stage: Export_Solutions
+    jobs:
+      - template: jobs/solution-export/parallel-export.yml
+        parameters:
+          artifactName: "solution-artifact"
+          environment: $(Environment)
+          solutions:
+            - "CUCore"
+            - "CUAdmissions"
+  - stage: Commit_Solutions
+    dependsOn: Export_Solutions
+    jobs:
+      - template: jobs/solution-export/aggregate-commit.yml
+        parameters:
+          artifactName: "solution-artifact"
+          solutions:
+            - "CUCore"
+            - "CUAdmissions"

@@ -1,0 +1,56 @@
+name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
+
+trigger:
+- master
+
+stages:
+- stage: Build
+  
+  jobs:
+  - job:
+    displayName: "Build managed solution"
+  
+    pool:
+      vmImage: 'vs2017-win2016'
+
+    steps:
+    - task: PowerAppsToolInstaller@0
+
+    - task: PowerAppsPackSolution@0
+      inputs:
+        SolutionSourceFolder: '$(Build.SourcesDirectory)\$(SolutionContentDirectory)'
+        SolutionOutputFile: '$(Pipeline.Workspace)\unmanaged-solutions\$(SolutionName)_managed.zip'
+        SolutionType: Managed
+
+    - publish: $(Pipeline.Workspace)\managed-solutions
+      artifact: solution-artifacts
+      displayName: Publish pipeline artifact - $(SolutionName)_managed.zip
+
+- stage: Release
+
+  jobs:
+    # track deployments on the environment
+  - deployment: Release
+    displayName:  Release managed solution to $(TargetEnvironment)
+    pool:
+      vmImage: 'vs2017-win2016'
+
+    # Automatically creates an environment in Azure DevOps with the name of the target environment
+    # Allows tracking of deployments to that environment and enabling checks to gate deployments
+    environment: $(TargetEnvironment)
+    
+    strategy:    
+      runOnce:
+        deploy:
+          steps:
+
+          # Artifact download happens automatically in a deployment job
+ 
+          - task: PowerAppsToolInstaller@0
+
+          - task: PowerAppsImportSolution@0
+            inputs:
+              PowerAppsEnvironment: '$(TargetEnvironment)'
+              SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\$(SolutionName)_managed.zip'
+              AsyncOperation: true
+              MaxAsyncWaitTime: '240'
