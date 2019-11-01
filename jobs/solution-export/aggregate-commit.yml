@@ -10,6 +10,16 @@ jobs:
       vmImage: "vs2017-win2016"
 
     steps:
+      - checkout: self
+        persistCredentials: true
+
+      # Reattach to branch (variable)
+      # Configure user.name and user.email
+      - script: |
+          git checkout $(Build.SourceBranch)
+          git config user.name "Test User"
+          git config user.email "Test@test.com"
+
       - download: current
 
       - ${{ each solution in parameters.solutions }}:
@@ -29,12 +39,6 @@ jobs:
 
       - publish: $(Build.SourcesDirectory)/solutions
         artifact: EXAMPLE-COMMIT
-
-      - checkout: self
-        persistCredentials: true
-      # Reattach to branch (variable)
-      # Configure user.name and user.email
       # Commit
       # Push
-      # project collection build service accounts.
-      # Has contribute permissions
+      # TODO ensure project collection build service accounts has contribute permissions
