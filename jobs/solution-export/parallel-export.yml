@@ -22,7 +22,7 @@ jobs:
       VmImage: "vs2017-win2016"
 
     steps:
-      download: current
+      - download: current
 
       # Unpack both managed and unmanaged solution
       - task: PowerAppsUnpackSolution@0
