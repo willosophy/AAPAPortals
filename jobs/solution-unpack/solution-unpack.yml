@@ -2,8 +2,9 @@ parameters:
   artifactName: ""
   SolutionName: ""
 
+jobs:
   - job:
-    dependsOn: 
+    dependsOn:
       - Export_${{ parameters.SolutionName }}_managed
       - Export_${{ parameters.SolutionName }}_unmanaged
     pool:
