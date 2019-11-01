@@ -31,9 +31,6 @@ jobs:
               TargetFolder: "$(Build.SourcesDirectory)/solutions"
               OverWrite: true
 
-      - publish: $(Build.SourcesDirectory)/solutions
-        artifact: EXAMPLE-COMMIT
-
       - script: |
           git add .
           git commit -m "Automated commit of solutions: ${{ join(', ', parameters.solutions) }}"
