@@ -1,0 +1,18 @@
+parameters:
+  artifactName: ""
+  environment: ""
+  SolutionName: ""
+
+jobs:
+  - template: export.yml
+    parameters:
+      artifactName: ${{ parameters.artifactName }}-${{ parameters.SolutionName }}
+      environment: ${{ parameters.environment }}
+      solutionName: ${{ parameters.SolutionName }}
+      solutionType: "Managed"
+  - template: export.yml
+    parameters:
+      artifactName: ${{ parameters.artifactName }}-${{ parameters.SolutionName }}
+      environment: ${{ parameters.environment }}
+      solutionName: ${{ parameters.SolutionName }}
+      solutionType: "Unmanaged"

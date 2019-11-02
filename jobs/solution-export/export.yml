@@ -1,0 +1,38 @@
+parameters:
+  artifactName: "solution-artifact"
+  environment: ""
+  solutionName: ""
+  solutionType: ""
+
+jobs:
+  - job: Export_${{ parameters.solutionName }}_${{ parameters.solutionType }}
+    pool:
+      vmImage: "vs2017-win2016"
+
+    steps:
+      - task: PowerAppsToolInstaller@0
+
+      - ${{ if eq(parameters.solutionType, 'unmanaged') }}:
+          # Export Unmanaged Solution
+          - task: PowerAppsExportSolution@0
+            inputs:
+              SolutionName: "${{ parameters.solutionName }}"
+              SolutionOutputFile: '$(Pipeline.Workspace)\packed-solution\${{ parameters.solutionName }}.zip'
+              PowerAppsEnvironment: "${{ parameters.environment }}"
+            displayName: "Export - ${{ parameters.solutionName }} unmanaged"
+
+          - publish: $(Pipeline.Workspace)
+            artifact: ${{ parameters.artifactName }}
+
+      - ${{ if eq(parameters.solutionType, 'managed') }}:
+          # Export Managed Solution
+          - task: PowerAppsExportSolution@0
+            inputs:
+              SolutionName: "${{ parameters.solutionName }}"
+              SolutionOutputFile: '$(Pipeline.Workspace)\packed-solution\${{ parameters.solutionName }}_managed.zip'
+              PowerAppsEnvironment: "${{ parameters.environment }}"
+              Managed: true
+            displayName: "Export - ${{ parameters.solutionName }} managed solution"
+
+          - publish: $(Pipeline.Workspace)
+            artifact: ${{ parameters.artifactName }}_managed

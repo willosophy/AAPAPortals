@@ -1,0 +1,23 @@
+trigger: none
+variables:
+  SolutionName: CUCore
+
+stages:
+  - stage: Export_Solutions
+    jobs:
+      - template: jobs/solution-export/parallel-export.yml
+        parameters:
+          artifactName: "solution-artifact"
+          environment: $(Environment)
+          SolutionName: ${{ variables.SolutionName }}
+  - stage: Commit_Solutions
+    dependsOn: Export_Solutions
+    jobs:
+      - template: jobs/solution-unpack/solution-unpack.yml
+        parameters:
+          artifactName: "solution-artifact"
+          SolutionName: ${{ variables.SolutionName }}
+      # - template: jobs/solution-export/aggregate-commit.yml
+      #   parameters:
+      #     artifactName: "solution-artifact"
+      #     SolutionName: ${{ variables.SolutionName }}
