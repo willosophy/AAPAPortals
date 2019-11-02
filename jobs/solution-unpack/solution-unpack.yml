@@ -13,15 +13,16 @@ jobs:
       - task: PowerAppsToolInstaller@0
 
       - pwsh: |
-          New-Item -Path "$(Build.SourcesDirectory)" -Name "solutions" -ItemType "directory"
-          Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
-          Copy-Item -Path "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\*" -Destination "$(Build.SourcesDirectory)/solutions" -Recurse
+          New-Item -Path "$(Pipeline.Workspace)" -Name "solutions" -ItemType "directory"
+          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}\*" -Destination "$(Pipeline.Workspace)\solutions" -Recurse
+          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\*" -Destination "$(Pipeline.Workspace)\solutions" -Recurse
+       displayName: Copy solutions to 
 
       # Unpack both managed and unmanaged solution
       - task: PowerAppsUnpackSolution@0
         inputs:
-          SolutionInputFile: '$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}\packed\${{ parameters.SolutionName }}.zip'
-          SolutionTargetFolder: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\unpacked\${{ parameters.SolutionName }}'
+          SolutionInputFile: '$(Pipeline.Workspace)\solutions\${{ parameters.SolutionName }}.zip'
+          SolutionTargetFolder: '$(Build.SourcesDirectory)\solutions\${{ parameters.SolutionName }}'
           SolutionType: Both
 
       - publish: $(Pipeline.Workspace)/${{ parameters.artifactName }}
