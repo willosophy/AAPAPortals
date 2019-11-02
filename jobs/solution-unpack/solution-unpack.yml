@@ -10,13 +10,15 @@ jobs:
     steps:
       - download: current
 
-      - task: PowerAppsToolInstaller@0
+      - script: dir
 
       - pwsh: |
           New-Item -Path "$(Pipeline.Workspace)" -Name "solutions" -ItemType "directory"
           Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}\*" -Destination "$(Pipeline.Workspace)\solutions" -Recurse
           Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}_managed\*" -Destination "$(Pipeline.Workspace)\solutions" -Recurse
         displayName: Copy solutions files 
+
+      - task: PowerAppsToolInstaller@0
 
       # Unpack both managed and unmanaged solution
       - task: PowerAppsUnpackSolution@0
