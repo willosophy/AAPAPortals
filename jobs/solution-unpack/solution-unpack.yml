@@ -29,9 +29,6 @@ jobs:
           SolutionTargetFolder: '$(Build.SourcesDirectory)\solutions\${{ parameters.SolutionName }}'
           SolutionType: Both
 
-      - publish: $(Pipeline.Workspace)/${{ parameters.artifactName }}
-        artifact: ${{ parameters.artifactName }}
-
       - checkout: self
         persistCredentials: true
 
@@ -42,8 +39,6 @@ jobs:
           git config user.name "Automated Pipeline Commit"
           git config user.email "PPALM-Exploration-Build-Account"
         displayName: "Checkout branch and config user"
-
-      - download: current
 
       - script: |
           git add .
