@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - download: current
-        pattern: '**/.zip'
+        patterns: '**/.zip'
 
       - script: | 
           cd $(Pipeline.Workspace)
