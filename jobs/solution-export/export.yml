@@ -22,7 +22,7 @@ jobs:
             displayName: "Export - ${{ parameters.solutionName }} unmanaged"
 
           - publish: $(Pipeline.Workspace)
-            artifact: ${{ parameters.artifactName }}_managed
+            artifact: ${{ parameters.artifactName }}
 
       - ${{ if eq(parameters.solutionType, 'managed') }}:
           # Export Managed Solution
