@@ -1,7 +1,13 @@
 name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
 
 trigger:
-  - master
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - solutions/*
 
 stages:
   - stage: Build
