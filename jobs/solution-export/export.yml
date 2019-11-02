@@ -17,20 +17,22 @@ jobs:
           - task: PowerAppsExportSolution@0
             inputs:
               SolutionName: "${{ parameters.solutionName }}"
-              SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.artifactName }}\packed\${{ parameters.solutionName }}.zip'
+              SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.solutionName }}.zip'
               PowerAppsEnvironment: "${{ parameters.environment }}"
             displayName: "Export - ${{ parameters.solutionName }} unmanaged"
 
-          - publish: $(Pipeline.Workspace)\${{ parameters.artifactName }}
+          - publish: $(Pipeline.Workspace)
+            artifact: ${{ parameters.artifactName }}_managed
 
       - ${{ if eq(parameters.solutionType, 'managed') }}:
           # Export Managed Solution
           - task: PowerAppsExportSolution@0
             inputs:
               SolutionName: "${{ parameters.solutionName }}"
-              SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.artifactName }}_managed\packed\${{ parameters.solutionName }}_managed.zip'
+              SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.solutionName }}_managed.zip'
               PowerAppsEnvironment: "${{ parameters.environment }}"
               Managed: true
             displayName: "Export - ${{ parameters.solutionName }} managed solution"
 
-          - publish: $(Pipeline.Workspace)\${{ parameters.artifactName }}_managed
+          - publish: $(Pipeline.Workspace)
+            artifact: ${{ parameters.artifactName }}_managed
