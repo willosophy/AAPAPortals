@@ -17,7 +17,7 @@ jobs:
           - task: PowerAppsExportSolution@0
             inputs:
               SolutionName: "${{ parameters.solutionName }}"
-              SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.solutionName }}.zip'
+              SolutionOutputFile: '$(Pipeline.Workspace)\packed-solution\${{ parameters.solutionName }}.zip'
               PowerAppsEnvironment: "${{ parameters.environment }}"
             displayName: "Export - ${{ parameters.solutionName }} unmanaged"
 
@@ -29,7 +29,7 @@ jobs:
           - task: PowerAppsExportSolution@0
             inputs:
               SolutionName: "${{ parameters.solutionName }}"
-              SolutionOutputFile: '$(Pipeline.Workspace)\${{ parameters.solutionName }}_managed.zip'
+              SolutionOutputFile: '$(Pipeline.Workspace)\packed-solution\${{ parameters.solutionName }}_managed.zip'
               PowerAppsEnvironment: "${{ parameters.environment }}"
               Managed: true
             displayName: "Export - ${{ parameters.solutionName }} managed solution"

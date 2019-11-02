@@ -16,8 +16,8 @@ jobs:
 
       - pwsh: |
           New-Item -Path "$(Pipeline.Workspace)" -Name "solutions" -ItemType "directory"
-          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}\*" -Destination "$(Pipeline.Workspace)\solutions"
-          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\*" -Destination "$(Pipeline.Workspace)\solutions" 
+          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}\packed-solution\*" -Destination "$(Pipeline.Workspace)\solutions"
+          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\packed-solution\*" -Destination "$(Pipeline.Workspace)\solutions" 
         displayName: Copy solutions files 
 
       - task: PowerAppsToolInstaller@0
