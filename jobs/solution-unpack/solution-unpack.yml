@@ -14,8 +14,8 @@ jobs:
 
       - pwsh: |
           New-Item -Path "$(Pipeline.Workspace)" -Name "solutions" -ItemType "directory"
-          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}\*" -Destination "$(Pipeline.Workspace)\solutions" -Recurse
-          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\*" -Destination "$(Pipeline.Workspace)\solutions" -Recurse
+          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}\*" -Destination "$(Pipeline.Workspace)\solutions" -Recurse
+          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}_managed\*" -Destination "$(Pipeline.Workspace)\solutions" -Recurse
         displayName: Copy solutions files 
 
       # Unpack both managed and unmanaged solution
