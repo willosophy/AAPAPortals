@@ -10,7 +10,9 @@ jobs:
     steps:
       - download: current
 
-      - script: dir
+      - script: | 
+          cd $(Pipeline.Workspace)
+          dir
 
       - pwsh: |
           New-Item -Path "$(Pipeline.Workspace)" -Name "solutions" -ItemType "directory"
