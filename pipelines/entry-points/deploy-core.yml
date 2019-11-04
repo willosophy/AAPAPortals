@@ -1,8 +1,5 @@
 name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
 
-variables: 
-  SolutionContentDirectory: "solutions/CUCore"
-
 trigger:
   batch: true
   branches:
@@ -10,11 +7,11 @@ trigger:
       - master
   paths:
     include:
-      - ${{ variables.SolutionContentDirectory }}
+      - "solutions/CUCore"
 
 stages:
   - template: ../stages/build-and-release.yml
     parameters: 
-      SolutionContentDirectory: ${{ variables.SolutionContentDirectory }}
+      SolutionContentDirectory: "solutions/CUCore"
       SolutionName: "CUCore"
       TargetEnvironment: "release-target"
