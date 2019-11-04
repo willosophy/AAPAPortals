@@ -7,7 +7,7 @@ trigger:
       - master
   paths:
     include:
-      - solutions/*
+      - solutions/CUCore/*
 
 stages:
   - template: ../stages/build-and-release.yml
