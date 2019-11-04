@@ -24,6 +24,7 @@ jobs:
       - task: PowerAppsToolInstaller@0
 
       # Unpack both managed and unmanaged solution
+      # TODO talk to PG about adding allowdelete - for auto commits if you delete components the current process leaves the files intact.
       - task: PowerAppsUnpackSolution@0
         inputs:
           SolutionInputFile: '$(Pipeline.Workspace)\solutions\${{ parameters.SolutionName }}.zip'
