@@ -1,13 +1,7 @@
-name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
-
-trigger:
-  batch: true
-  branches:
-    include:
-      - master
-  paths:
-    include:
-      - solutions/*
+parameters:
+  SolutionContentDirectory: ""
+  SolutionName: ""
+  TargetEnvironment: ""
 
 stages:
   - stage: Build
@@ -24,26 +18,26 @@ stages:
 
           - task: PowerAppsPackSolution@0
             inputs:
-              SolutionSourceFolder: '$(Build.SourcesDirectory)\$(SolutionContentDirectory)'
-              SolutionOutputFile: '$(Pipeline.Workspace)\managed-solutions\$(SolutionName)_managed.zip'
+              SolutionSourceFolder: '$(Build.SourcesDirectory)\${{ parameters.SolutionContentDirectory }}'
+              SolutionOutputFile: '$(Pipeline.Workspace)\managed-solutions\${{ parameters.solutionName }}_managed.zip'
               SolutionType: Managed
 
           - publish: $(Pipeline.Workspace)\managed-solutions
             artifact: solution-artifacts
-            displayName: Publish pipeline artifact - $(SolutionName)_managed.zip
+            displayName: Publish pipeline artifact - ${{ parameters.solutionName }}_managed.zip
 
   - stage: Release
 
     jobs:
       # track deployments on the environment
       - deployment: Release
-        displayName: Release managed solution to $(TargetEnvironment)
+        displayName: Release managed solution to ${{ parameters.TargetEnvironment }}
         pool:
           vmImage: "vs2017-win2016"
 
         # Automatically creates an environment in Azure DevOps with the name of the target environment
         # Allows tracking of deployments to that environment and enabling checks to gate deployments
-        environment: $(TargetEnvironment)
+        environment: ${{ parameters.TargetEnvironment }}
 
         strategy:
           runOnce:
@@ -55,7 +49,7 @@ stages:
 
                 - task: PowerAppsImportSolution@0
                   inputs:
-                    PowerAppsEnvironment: "$(TargetEnvironment)"
-                    SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\$(SolutionName)_managed.zip'
+                    PowerAppsEnvironment: "${{ parameters.TargetEnvironment }}"
+                    SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\${{ parameters.solutionName }}_managed.zip'
                     AsyncOperation: true
                     MaxAsyncWaitTime: "240"

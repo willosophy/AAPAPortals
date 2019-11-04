@@ -5,7 +5,7 @@ variables:
 stages:
   - stage: Export_Solutions
     jobs:
-      - template: jobs/solution-export/parallel-export.yml
+      - template: ../jobs/solution-export/parallel-export.yml
         parameters:
           artifactName: "solution-artifact"
           environment: $(Environment)
@@ -13,7 +13,7 @@ stages:
   - stage: Commit_Solutions
     dependsOn: Export_Solutions
     jobs:
-      - template: jobs/solution-unpack/solution-unpack.yml
+      - template: ../jobs/solution-unpack/solution-unpack.yml
         parameters:
           artifactName: "solution-artifact"
           SolutionName: ${{ variables.SolutionName }}
