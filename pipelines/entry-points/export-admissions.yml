@@ -15,7 +15,7 @@ stages:
   - stage: Commit_Solutions
     dependsOn: Export_Solutions
     jobs:
-      - template: ../jobs/solution-unpack/solution-unpack.yml
+      - template: ../jobs/solution-unpack/solution-unpack-commit.yml
         parameters:
           ArtifactName: ${{ variables.ArtifactName }}
           SolutionName: ${{ variables.SolutionName }}
