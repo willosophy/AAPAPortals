@@ -11,10 +11,6 @@ jobs:
       - download: current
         patterns: '**/*.zip'
 
-      - script: | 
-          cd $(Pipeline.Workspace)
-          dir
-
       - pwsh: |
           New-Item -Path "$(Pipeline.Workspace)" -Name "solutions" -ItemType "directory"
           Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}\packed-solution\*" -Destination "$(Pipeline.Workspace)\solutions"
