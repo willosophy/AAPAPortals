@@ -1,0 +1,17 @@
+name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - "solutions/CUCore"
+
+stages:
+  - template: ../stages/build-and-release.yml
+    parameters: 
+      SolutionContentDirectory: "solutions/CUCore"
+      SolutionName: "CUCore"
+      TargetEnvironment: "release-target"
