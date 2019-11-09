@@ -14,3 +14,10 @@ stages:
     steps:
 
     - script: echo "Hello, world!"
+
+    - task: PowerAppsCreateEnvironment@0
+      inputs:
+        PowerAppsAdminCredentials: 'Admin API Service'
+        DeploymentRegion: 'https://admin.services.crm.dynamics.com'
+        DomainName: '(test)-core-dev'
+        FriendlyName: 'Core Development Environment'
