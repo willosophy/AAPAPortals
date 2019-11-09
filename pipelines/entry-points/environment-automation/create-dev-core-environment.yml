@@ -19,5 +19,5 @@ stages:
       inputs:
         PowerAppsAdminCredentials: 'Admin API Service'
         DeploymentRegion: 'https://admin.services.crm.dynamics.com'
-        DomainName: '(test)-core-dev'
+        DomainName: 'meecrosoft'
         FriendlyName: 'Core Development Environment'
