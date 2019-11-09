@@ -21,3 +21,7 @@ stages:
         DeploymentRegion: 'https://admin.services.crm.dynamics.com'
         DomainName: 'meecrosoft'
         FriendlyName: 'Core Development Environment'
+        TargetRelease: bce9abbf-90fd-42e7-b0e5-1ced6df22fa1
+        InstanceType: Sandbox
+        BaseLanguage: 1033
+        
