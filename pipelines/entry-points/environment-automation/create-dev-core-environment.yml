@@ -2,6 +2,9 @@ name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
 
 trigger: none
 
+variables:
+  apiUrl: "https://admin.services.crm.dynamics.com"
+
 stages:
 - stage: Create_Environment
   displayName: Create Environment
@@ -13,12 +16,31 @@ stages:
 
     steps:
 
-    - script: echo "Hello, world!"
-
     - powershell: |
         Install-Module Microsoft.Xrm.OnlineManagementAPI -force
+      displayName: "Install Microsoft.Xrm.OnlineManagementAPI"
 
     - powershell: |
         $SecurePassword  = convertto-securestring $(account.password) -asplaintext -force
         $Cred = New-Object System.Management.Automation.PSCredential ("$(account.username)", $SecurePassword)
-        Get-CrmInstances -ApiUrl "https://admin.services.crm.dynamics.com" -Credential $Cred
+      displayName: "Setup credentials"
+
+    - powershell: |
+        $InstanceInfo = New-CrmInstanceInfo `
+          -BaseLanguage 1033 `
+          -DomainName meecrosoft `
+          -FriendlyName "$(Environment.FriendlyName)" `
+          -InitialUserEmail "admin-api-service@meecrosoft.onmicrosoft.com" `
+          -InstanceType Sandbox `
+          -ServiceVersionId bce9abbf-90fd-42e7-b0e5-1ced6df22fa1 `
+          -CurrencyCode 840 `
+          -CurrencyName USD `
+          -CurrencyPrecision 2 `
+          -CurrencySymbol $ `
+          -Purpose "Development Instance"
+        New-CrmInstance `
+          -ApiUrl ${{ variables.apiUrl }} `
+          -NewInstanceInfo $InstanceInfo `
+          -Credential $Cred `
+          -NonInteractive
+      displayName: "Create new environment: $(Environment.FriendlyName)"
