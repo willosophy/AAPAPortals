@@ -15,9 +15,10 @@ stages:
 
     - script: echo "Hello, world!"
 
-    - pwsh: |
+    - powershell: |
         Install-Module Microsoft.Xrm.OnlineManagementAPI
 
-    - pwsh: |
+    - powershell: |
         $SecurePassword  = convertto-securestring $(account.password) -asplaintext -force
+        $Cred = New-Object System.Management.Automation.PSCredential ($(account.username), $SecurePassword)
         Get-CrmInstances -ApiUrl "https://admin.services.crm.dynamics.com" -Credential $SecurePassword
