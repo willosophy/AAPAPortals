@@ -19,4 +19,5 @@ stages:
         Install-Module Microsoft.Xrm.OnlineManagementAPI
 
     - pwsh: |
-        Get-CrmInstances -ApiUrl "https://admin.services.crm.dynamics.com" -Credential (Get-Credential)
+        $SecurePassword  = convertto-securestring $(account.password) -asplaintext -force
+        Get-CrmInstances -ApiUrl "https://admin.services.crm.dynamics.com" -Credential $SecurePassword
