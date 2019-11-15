@@ -39,7 +39,7 @@ stages:
           -CurrencySymbol $ `
           -Purpose "Development Instance"
         New-CrmInstance `
-          -ApiUrl ${{ variables.apiUrl }} `
+          -ApiUrl "${{ variables.apiUrl }}" `
           -NewInstanceInfo $InstanceInfo `
           -Credential $Cred `
           -NonInteractive
