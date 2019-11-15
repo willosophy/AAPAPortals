@@ -16,7 +16,7 @@ stages:
     - script: echo "Hello, world!"
 
     - powershell: |
-        Install-Module Microsoft.Xrm.OnlineManagementAPI
+        Install-Module Microsoft.Xrm.OnlineManagementAPI -force
 
     - powershell: |
         $SecurePassword  = convertto-securestring $(account.password) -asplaintext -force
