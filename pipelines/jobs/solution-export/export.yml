@@ -21,7 +21,7 @@ jobs:
               PowerAppsEnvironment: "${{ parameters.environment }}"
             displayName: "Export - ${{ parameters.solutionName }} unmanaged"
 
-          - publish: $(Pipeline.Workspace)
+          - publish: $(Pipeline.Workspace)\packed-solution
             artifact: ${{ parameters.artifactName }}
 
       - ${{ if eq(parameters.solutionType, 'managed') }}:
@@ -34,5 +34,5 @@ jobs:
               Managed: true
             displayName: "Export - ${{ parameters.solutionName }} managed solution"
 
-          - publish: $(Pipeline.Workspace)
+          - publish: $(Pipeline.Workspace)\packed-solution
             artifact: ${{ parameters.artifactName }}_managed

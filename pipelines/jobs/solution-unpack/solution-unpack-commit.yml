@@ -13,19 +13,9 @@ jobs:
 
       - pwsh: |
           New-Item -Path "$(Pipeline.Workspace)" -Name "solutions" -ItemType "directory"
-          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}\packed-solution\*" -Destination "$(Pipeline.Workspace)\solutions"
-          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\packed-solution\*" -Destination "$(Pipeline.Workspace)\solutions" 
+          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}\*" -Destination "$(Pipeline.Workspace)\solutions"
+          Copy-Item -Path "$(Pipeline.Workspace)\${{ parameters.artifactName }}-${{ parameters.SolutionName }}_managed\*" -Destination "$(Pipeline.Workspace)\solutions" 
         displayName: Copy solutions files 
-
-      - task: PowerAppsToolInstaller@0
-
-      # Unpack both managed and unmanaged solution
-      # TODO talk to PG about adding allowdelete - for auto commits if you delete components the current process leaves the files intact.
-      - task: PowerAppsUnpackSolution@0
-        inputs:
-          SolutionInputFile: '$(Pipeline.Workspace)\solutions\${{ parameters.SolutionName }}.zip'
-          SolutionTargetFolder: '$(Build.SourcesDirectory)\solutions\${{ parameters.SolutionName }}'
-          SolutionType: Both
 
       - checkout: self
         persistCredentials: true
@@ -37,6 +27,16 @@ jobs:
           git config user.name "Automated Pipeline Commit"
           git config user.email "PPALM-Exploration-Build-Account"
         displayName: "Checkout branch and config user"
+
+      - task: PowerAppsToolInstaller@0
+
+      # Unpack both managed and unmanaged solution
+      # TODO talk to PG about adding allowdelete - for auto commits if you delete components the current process leaves the files intact.
+      - task: PowerAppsUnpackSolution@0
+        inputs:
+          SolutionInputFile: '$(Pipeline.Workspace)\solutions\${{ parameters.SolutionName }}.zip'
+          SolutionTargetFolder: '$(Build.SourcesDirectory)\solutions\${{ parameters.SolutionName }}'
+          SolutionType: Both
 
       - script: |
           git add .
