@@ -14,4 +14,4 @@ stages:
     parameters: 
       SolutionContentDirectory: "solutions/TestSolution"
       SolutionName: "TestSolution"
-      TargetEnvironment: "test-environment"
+      TargetEnvironment: "target-environment"
