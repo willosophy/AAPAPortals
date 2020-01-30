@@ -9,7 +9,11 @@
   <EntityRelationships />
   <OrganizationSettings />
   <optionsets />
+  <WebResources />
   <CustomControls />
+  <SolutionPluginAssemblies />
+  <SdkMessageProcessingSteps />
+  <AppModules />
   <EntityDataProviders />
   <Languages>
     <Language>1033</Language>

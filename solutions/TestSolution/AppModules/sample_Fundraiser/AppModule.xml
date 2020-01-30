@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>sample_Fundraiser</UniqueName>
+  <IntroducedVersion>1.0.0.2</IntroducedVersion>
+  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="62" schemaName="sample_Fundraiser" />
+    <AppModuleComponent type="60" id="{260a7ce0-3591-e811-a963-000d3a33eeed}" />
+    <AppModuleComponent type="1" schemaName="contact" />
+    <AppModuleComponent type="1" schemaName="sample_donation" />
+    <AppModuleComponent type="1" schemaName="paul_exampleentity" />
+    <AppModuleComponent type="1" schemaName="sample_fundraiser" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="Fundraiser" languagecode="1033" />
+  </LocalizedNames>
+</AppModule>

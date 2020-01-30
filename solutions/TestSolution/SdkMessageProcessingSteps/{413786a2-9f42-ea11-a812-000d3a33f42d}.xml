@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="PluginExamples.postCreateContact: Create of contact" SdkMessageProcessingStepId="{413786a2-9f42-ea11-a812-000d3a33f42d}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <PluginTypeName>PluginExamples.postCreateContact, PluginExamples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=02c03beb8eb5e1a2</PluginTypeName>
+  <PluginTypeId>ea6fb786-3678-424d-b32f-b3a01b9db08a</PluginTypeId>
+  <PrimaryEntity>contact</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>PluginExamples.postCreateContact: Create of contact</Description>
+  <FilteringAttributes></FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <SdkMessageId>{9ebdbb1b-ea3e-db11-86a7-000a3a5473e8}</SdkMessageId>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>40</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

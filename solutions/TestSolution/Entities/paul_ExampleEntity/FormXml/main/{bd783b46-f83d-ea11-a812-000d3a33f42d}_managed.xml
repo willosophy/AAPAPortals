@@ -5,7 +5,7 @@
     <IntroducedVersion>1.0.0.2</IntroducedVersion>
     <FormPresentation>1</FormPresentation>
     <FormActivationState>1</FormActivationState>
-    <form headerdensity="HighWithControls">
+    <form headerdensity="HighWithControls" shownavigationbar="true" showImage="false" maxWidth="1920">
       <tabs>
         <tab verticallayout="true" id="{1ce36426-6c7d-47a1-afa9-1cc693e51ff1}" IsUserDefined="1" labelid="{9f72cd8d-b7c6-4b88-916b-71b8cb651aea}">
           <labels>
@@ -33,6 +33,14 @@
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{99a965de-e4b9-4a83-9b43-4ca6b90a583c}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="paul_test" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="paul_test" disabled="false" />
                       </cell>
                     </row>
                   </rows>
@@ -84,6 +92,46 @@
           </row>
         </rows>
       </footer>
+      <Navigation>
+        <NavBar></NavBar>
+        <NavBarAreas>
+          <NavBarArea Id="Info">
+            <Titles>
+              <Title LCID="1033" Text="Common" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Sales">
+            <Titles>
+              <Title LCID="1033" Text="Sales" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Service">
+            <Titles>
+              <Title LCID="1033" Text="Service" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Marketing">
+            <Titles>
+              <Title LCID="1033" Text="Marketing" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="ProcessCenter">
+            <Titles>
+              <Title LCID="1033" Text="Process Sessions" />
+            </Titles>
+          </NavBarArea>
+        </NavBarAreas>
+      </Navigation>
+      <formLibraries>
+        <Library name="paul_orderOfExec.js" libraryUniqueId="{95ee8094-588c-43c8-99ea-336b10e185b0}" />
+      </formLibraries>
+      <events>
+        <event name="onchange" application="false" active="false" attribute="paul_name">
+          <Handlers>
+            <Handler functionName="hideField" libraryName="paul_orderOfExec.js" handlerUniqueId="{c959a727-1d62-aabb-c3ca-a5d8b3801945}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
       <DisplayConditions Order="1" FallbackForm="true">
         <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
         <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
