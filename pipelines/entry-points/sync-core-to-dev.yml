@@ -1,0 +1,15 @@
+name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
+
+trigger: none
+
+stages:
+  - template: ../stages/build-and-sync-dev.yml
+    parameters: 
+      SolutionContentDirectory: "solutions/CUCore"
+      SolutionName: "CUCore"
+      TargetEnvironment: "admissions-dev"
+  - template: ../stages/build-and-sync-dev.yml
+    parameters: 
+      SolutionContentDirectory: "solutions/CUCore"
+      SolutionName: "CUCore"
+      TargetEnvironment: "finAid-dev"
