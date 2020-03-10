@@ -3,21 +3,9 @@ name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
 trigger: none
 
 stages:
-  # Admissions
-  - template: ../stages/build-unmanaged.yml
+  - template: ../stages/build-and-release.yml
     parameters: 
       SolutionContentDirectory: "solutions/CUCore"
       SolutionName: "CUCore"
       TargetEnvironment: "admissions_dev"
-  - template: ../stages/release-unmanaged.yml
-    parameters: 
-      SolutionContentDirectory: "solutions/CUCore"
-      SolutionName: "CUCore"
-      TargetEnvironment: "admissions_dev"
-  
-  # Financial Aid
-  - template: ../stages/release-unmanaged.yml
-    parameters: 
-      SolutionContentDirectory: "solutions/CUCore"
-      SolutionName: "CUCore"
-      TargetEnvironment: "finAid_dev"
+    #TODO re-write release code to build once and deploy to many environments for syncing dev instances.
