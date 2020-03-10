@@ -4,7 +4,7 @@ parameters:
     TargetEnvironment: ""
   
 stages:
-  - stage: Build
+  - stage: Build_${{ parameters.TargetEnvironment }}
 
     jobs:
       - job:
@@ -26,7 +26,7 @@ stages:
           artifact: solution-artifacts
           displayName: Publish pipeline artifact - ${{ parameters.solutionName }}.zip
 
-  - stage: Release
+  - stage: Release_${{ parameters.TargetEnvironment }}
 
     jobs:
     # track deployments on the environment
