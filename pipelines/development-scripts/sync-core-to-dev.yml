@@ -3,12 +3,20 @@ name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
 trigger: none
 
 stages:
-  - template: ../stages/build-and-sync-dev.yml
+  # Admissions
+  - template: ../stages/build-unmanaged.yml
     parameters: 
       SolutionContentDirectory: "solutions/CUCore"
       SolutionName: "CUCore"
       TargetEnvironment: "admissions_dev"
-  - template: ../stages/build-and-sync-dev.yml
+  - template: ../stages/release-unmanaged.yml
+    parameters: 
+      SolutionContentDirectory: "solutions/CUCore"
+      SolutionName: "CUCore"
+      TargetEnvironment: "admissions_dev"
+  
+  # Financial Aid
+  - template: ../stages/release-unmanaged.yml
     parameters: 
       SolutionContentDirectory: "solutions/CUCore"
       SolutionName: "CUCore"
