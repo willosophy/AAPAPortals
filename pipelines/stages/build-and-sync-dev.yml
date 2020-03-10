@@ -40,9 +40,9 @@ stages:
       environment: Test
 
       strategy:
-      runOnce:
-        deploy:
-        steps:
+        runOnce:
+          deploy:
+            steps:
             # Artifact download happens automatically in a deployment job
 
             - task: PowerAppsToolInstaller@0
