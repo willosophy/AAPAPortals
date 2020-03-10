@@ -82,8 +82,6 @@
       <RootComponent type="60" id="{6f816d18-d6fc-e911-a812-000d3a34717b}" behavior="0" />
       <RootComponent type="62" schemaName="cu_AddmissionsApp" behavior="0" />
       <RootComponent type="62" schemaName="cu_Admissions" behavior="0" />
-      <RootComponent type="80" id="{08d9d674-5cfb-e911-a812-000d3a34717b}" behavior="0" />
-      <RootComponent type="80" id="{4df42341-12fc-e911-a812-000d3a347d1c}" behavior="0" />
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
