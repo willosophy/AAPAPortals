@@ -48,8 +48,8 @@ stages:
             - task: PowerAppsToolInstaller@0
 
             - task: PowerAppsImportSolution@0
-                inputs:
-                  PowerAppsEnvironment: "${{ parameters.TargetEnvironment }}"
-                  SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\${{ parameters.solutionName }}.zip'
-                  AsyncOperation: true
-                  MaxAsyncWaitTime: "240"
+              inputs:
+                PowerAppsEnvironment: "${{ parameters.TargetEnvironment }}"
+                SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\${{ parameters.solutionName }}.zip'
+                AsyncOperation: true
+                MaxAsyncWaitTime: "240"
