@@ -21,8 +21,8 @@ stages:
       SolutionContentDirectory: "solutions/CUCore"
       SolutionName: "CUCore"
       TargetEnvironment: "finAid_dev"
-    - template: ../stages/release-unmanaged.yml
-      parameters: 
-        SolutionContentDirectory: "solutions/CUCore"
-        SolutionName: "CUCore"
-        TargetEnvironment: "finAid_dev"
+  - template: ../stages/release-unmanaged.yml
+    parameters: 
+      SolutionContentDirectory: "solutions/CUCore"
+      SolutionName: "CUCore"
+      TargetEnvironment: "finAid_dev"
