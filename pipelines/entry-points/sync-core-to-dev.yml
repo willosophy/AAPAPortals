@@ -7,9 +7,9 @@ stages:
     parameters: 
       SolutionContentDirectory: "solutions/CUCore"
       SolutionName: "CUCore"
-      TargetEnvironment: "admissions-dev"
+      TargetEnvironment: "admissions_dev"
   - template: ../stages/build-and-sync-dev.yml
     parameters: 
       SolutionContentDirectory: "solutions/CUCore"
       SolutionName: "CUCore"
-      TargetEnvironment: "finAid-dev"
+      TargetEnvironment: "finAid_dev"
