@@ -16,11 +16,6 @@ stages:
       TargetEnvironment: "admissions_dev"
   
   # Financial Aid
-  - template: ../stages/build-unmanaged.yml
-    parameters: 
-      SolutionContentDirectory: "solutions/CUCore"
-      SolutionName: "CUCore"
-      TargetEnvironment: "finAid_dev"
   - template: ../stages/release-unmanaged.yml
     parameters: 
       SolutionContentDirectory: "solutions/CUCore"
