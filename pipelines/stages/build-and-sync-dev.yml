@@ -37,7 +37,7 @@ stages:
 
         # Automatically creates an environment in Azure DevOps with the name of the target environment
         # Allows tracking of deployments to that environment and enabling checks to gate deployments
-        environment: ${{ parameters.TargetEnvironment }}
+        environment: Test
 
         strategy:
         runOnce:
