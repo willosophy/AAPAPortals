@@ -11,28 +11,28 @@ stages:
         displayName: "Build unmanaged solution"
 
         pool:
-        vmImage: "vs2017-win2016"
+          vmImage: "vs2017-win2016"
 
         steps:
         - task: PowerAppsToolInstaller@0
 
         - task: PowerAppsPackSolution@0
-            inputs:
+          inputs:
             SolutionSourceFolder: '$(Build.SourcesDirectory)\${{ parameters.SolutionContentDirectory }}'
             SolutionOutputFile: '$(Pipeline.Workspace)\unmanaged-solutions\${{ parameters.solutionName }}.zip'
             SolutionType: Unmanaged
 
         - publish: $(Pipeline.Workspace)\unmanaged-solutions
-            artifact: solution-artifacts
-            displayName: Publish pipeline artifact - ${{ parameters.solutionName }}.zip
+          artifact: solution-artifacts
+          displayName: Publish pipeline artifact - ${{ parameters.solutionName }}.zip
 
   - stage: Release
 
     jobs:
     # track deployments on the environment
     - deployment: Release
-        displayName: Release unmanaged solution to ${{ parameters.TargetEnvironment }}
-        pool:
+      displayName: Release unmanaged solution to ${{ parameters.TargetEnvironment }}
+      pool:
         vmImage: "vs2017-win2016"
 
         # Automatically creates an environment in Azure DevOps with the name of the target environment
@@ -48,7 +48,7 @@ stages:
                 - task: PowerAppsToolInstaller@0
 
                 - task: PowerAppsImportSolution@0
-                inputs:
+                  inputs:
                     PowerAppsEnvironment: "${{ parameters.TargetEnvironment }}"
                     SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\${{ parameters.solutionName }}.zip'
                     AsyncOperation: true
