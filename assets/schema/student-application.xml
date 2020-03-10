@@ -1,0 +1,7 @@
+<entities >
+  <entity name="cu_studentapplication" displayname="Student Application" etc="10083" primaryidfield="cu_studentapplicationid" primarynamefield="cu_name" disableplugins="false">
+    <fields>
+      <field displayname="Name" name="cu_name" type="string" customfield="true" />
+    </fields>
+  </entity>
+</entities>
