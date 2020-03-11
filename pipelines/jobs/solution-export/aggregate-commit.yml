@@ -25,7 +25,7 @@ jobs:
         inputs:
           SourceFolder: "$(Pipeline.Workspace)/${{ parameters.artifactName }}-${{ parameters.SolutionName }}/unpacked"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/solutions"
+          TargetFolder: "$(Build.SourcesDirectory)/solutions/${{ parameters.SolutionName }}/content"
           OverWrite: true
 
       - script: |
