@@ -22,7 +22,7 @@
                     <row>
                       <cell id="{676585fa-b25b-4830-b2a6-482d207681a7}" labelid="{12c9f5a8-9f83-4c3e-a649-17b6de964136}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Name" languagecode="1033" />
                         </labels>
                         <control id="cu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cu_name" />
                       </cell>
@@ -30,7 +30,7 @@
                     <row>
                       <cell id="{f09b313c-a3fd-4b80-b7ab-527a6bff0ba4}" labelid="{818bac0d-6496-4087-a7b2-cca25e732274}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Owner" languagecode="1033" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
