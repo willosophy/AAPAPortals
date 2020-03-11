@@ -12,6 +12,6 @@ trigger:
 stages:
   - template: ../stages/build-and-release.yml
     parameters: 
-      SolutionContentDirectory: "solutions/CUAdmissions"
+      SolutionContentDirectory: "solutions/CUAdmissions/content"
       SolutionName: "CUAdmissions"
       TargetEnvironment: "release-target"

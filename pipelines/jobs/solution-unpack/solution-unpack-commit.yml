@@ -35,7 +35,7 @@ jobs:
       - task: PowerAppsUnpackSolution@0
         inputs:
           SolutionInputFile: '$(Pipeline.Workspace)\solutions\${{ parameters.SolutionName }}.zip'
-          SolutionTargetFolder: '$(Build.SourcesDirectory)\solutions\${{ parameters.SolutionName }}'
+          SolutionTargetFolder: '$(Build.SourcesDirectory)\solutions\${{ parameters.SolutionName }}\content'
           SolutionType: Both
 
       - script: |

@@ -12,6 +12,6 @@ trigger:
 stages:
   - template: ../stages/build-and-release.yml
     parameters: 
-      SolutionContentDirectory: "solutions/CUCore"
+      SolutionContentDirectory: "solutions/CUCore/content"
       SolutionName: "CUCore"
       TargetEnvironment: "release-target"

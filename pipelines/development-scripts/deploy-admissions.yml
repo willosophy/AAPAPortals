@@ -5,11 +5,11 @@ trigger: none
 stages:
   - template: ../stages/build-unmanaged.yml
     parameters: 
-      SolutionContentDirectory: "solutions/CUAdmissions"
+      SolutionContentDirectory: "solutions/CUAdmissions/content"
       SolutionName: "CUAdmissions"
       TargetEnvironment: "admissions_dev"
   - template: ../stages/release-unmanaged.yml
     parameters: 
-      SolutionContentDirectory: "solutions/CUAdmissions"
+      SolutionContentDirectory: "solutions/CUAdmissions/content"
       SolutionName: "CUAdmissions"
       TargetEnvironment: "admissions_dev"
