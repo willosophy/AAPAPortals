@@ -1,9 +1,10 @@
 <entities >
   <entity name="coven_configuration" displayname="configuration" etc="10084" primaryidfield="coven_configurationid" primarynamefield="coven_name" disableplugins="false">
     <fields>
+      <field displayname="API Endpoint" name="coven_apiendpoint" type="string" customfield="true" />
+      <field displayname="configuration" name="coven_configurationid" type="guid" primaryKey="true" />
       <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
       <field displayname="Created On" name="createdon" type="datetime" />
-      <field displayname="API Endpoint" name="coven_apiendpoint" type="string" customfield="true" />
       <field displayname="Name" name="coven_name" type="string" customfield="true" />
     </fields>
   </entity>
