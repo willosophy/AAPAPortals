@@ -1,0 +1,29 @@
+parameters: 
+  solutions: []
+  powerAppsEnvironment: ''
+  userName: ''
+  userPassword: ''
+  serverUrl: ''
+
+jobs:
+ - job: Deploy_Managed_Dependencies
+   pool:
+     vmimage: "vs2017-win2016"
+   steps:
+    - task: PowerAppsToolInstaller@0
+
+    - ${{ each solution in parameters.solutions }}:
+      - task: PowerAppsImportSolution@0
+        inputs:
+          PowerAppsEnvironment: ${{ parameters.powerappsEnvironment }}
+          SolutionInputFile: ${{ solution.directory }}/${{ solution.name }}
+          AsyncOperation: true
+          MaxAsyncWaitTime: '240'
+        displayName: Import ${{ solution.name }} solution
+      - ${{ each datafile in solution.dataFiles }}:
+        - template: ../steps/import-data.yml
+          parameters:
+            dataFile: ${{ datafile }}
+            userName: ${{ parameters.userName }}
+            userPassword: ${{ parameters.userPassword }}
+            serverUrl: ${{ parameters.serverUrl }}

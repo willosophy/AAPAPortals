@@ -1,0 +1,12 @@
+  parameters:
+    userName: ''
+    userPassword: ''
+    serverUrl: ''
+    dataFile: ''
+
+  steps:
+    - task: PowerShell@2
+      inputs:
+        filePath: '$(Build.SourcesDirectory)\pipelines\powershell\import-data.ps1'
+        arguments: '-userName ${{ parameters.userName }} -userPassword ${{ parameters.userPassword }} -serverUrl ${{ parameters.serverUrl }} -dataFile ${{ parameters.datafile }}'
+      displayName: Import data from ${{ parameters.dataFile }}

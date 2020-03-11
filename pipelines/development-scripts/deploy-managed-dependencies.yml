@@ -1,0 +1,22 @@
+name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
+
+trigger: none
+
+jobs:
+ - template: ../jobs/deploy-managed-dependencies.yml
+   parameters:
+      solutions: [
+            {
+              name: "ExampleManagedDependency_1_0_0_0_managed.zip",
+              directory: "solutions/ExampleManagedDependency",
+              dataFiles: ["solutions/ExampleManagedDependency/data/configuration-data.zip"]
+            },
+            {
+              name: "ExampleManagedDependencyNoData_1_0_0_0_managed.zip",
+              directory: "solutions/ExampleManagedDependencyNoData",
+            }
+        ]
+      powerAppsEnvironment: 'admissions_dev'
+      userName: $(userName)
+      userPassword: $(userPassword)
+      serverUrl: $(serverUrl)
