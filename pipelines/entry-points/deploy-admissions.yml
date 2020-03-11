@@ -15,3 +15,15 @@ stages:
       SolutionContentDirectory: "solutions/CUAdmissions/content"
       SolutionName: "CUAdmissions"
       TargetEnvironment: "release-target"
+  - stage: Import_Config_Data
+    jobs:
+      - job:
+        pool:
+          vmimage: 'vs2017-win2016'
+        steps:
+        - template: ../steps/import-data.yml
+          parameters:
+            userName: $(userName)
+            userPassword: $(userPassword)
+            serverUrl: $(serverUrl)
+            dataFile: 'solutions\CUAdmissions\data\admissions-student-application-data.zip'

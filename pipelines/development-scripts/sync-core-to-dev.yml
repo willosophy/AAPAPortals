@@ -1,6 +1,13 @@
 name: $(Build.DefinitionName)-$(Build.SourceBranch)-$(Date:yyyyMMdd)
 
-trigger: none
+trigger:
+  batch: true
+  branches:
+    include:
+      - development
+  paths:
+    include:
+      - "solutions/CUCore"
 
 stages:
   - template: ../stages/build-and-release.yml
