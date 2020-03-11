@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.1.0.9439" SolutionPackageVersion="9.1" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.1.0.13841" SolutionPackageVersion="9.1" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>CUAdmissions</UniqueName>
     <LocalizedNames>
@@ -80,21 +80,37 @@
     <RootComponents>
       <RootComponent type="1" schemaName="cu_studentapplication" behavior="1" />
       <RootComponent type="60" id="{6f816d18-d6fc-e911-a812-000d3a34717b}" behavior="0" />
-      <RootComponent type="62" schemaName="cu_AddmissionsApp" behavior="0" />
       <RootComponent type="62" schemaName="cu_Admissions" behavior="0" />
+      <RootComponent type="80" schemaName="cu_Admissions" behavior="0" />
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
-        <Required key="0" type="1" schemaName="cu_studentapplication" displayName="Student Application" solution="Active" />
+        <Required key="0" type="1" schemaName="cu_studentapplication" displayName="Student Application" solution="CUCore (1.0.0.2)" />
         <Dependent key="0" type="1" schemaName="cu_studentapplication" displayName="Student Application" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="1" type="2" schemaName="cu_name" displayName="Name" parentSchemaName="cu_studentapplication" parentDisplayName="Student Application" solution="Active" />
-        <Dependent key="2" type="60" displayName="Student Application Form" parentDisplayName="Student Application" id="{6f816d18-d6fc-e911-a812-000d3a34717b}" />
+        <Required key="0" type="1" schemaName="cu_studentapplication" displayName="Student Application" solution="CUCore (1.0.0.2)" />
+        <Dependent key="1" type="60" displayName="Student Application Form" parentDisplayName="Student Application" id="{6f816d18-d6fc-e911-a812-000d3a34717b}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="3" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="cu_studentapplication" parentDisplayName="Student Application" solution="Active" />
-        <Dependent key="2" type="60" displayName="Student Application Form" parentDisplayName="Student Application" id="{6f816d18-d6fc-e911-a812-000d3a34717b}" />
+        <Required key="0" type="1" schemaName="cu_studentapplication" displayName="Student Application" solution="CUCore (1.0.0.2)" />
+        <Dependent key="2" type="62" schemaName="cu_Admissions" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="0" type="1" schemaName="cu_studentapplication" displayName="Student Application" solution="CUCore (1.0.0.2)" />
+        <Dependent key="3" type="80" schemaName="cu_Admissions" displayName="Admissions" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="4" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="cu_studentapplication" parentDisplayName="Student Application" solution="Active" />
+        <Dependent key="1" type="60" displayName="Student Application Form" parentDisplayName="Student Application" id="{6f816d18-d6fc-e911-a812-000d3a34717b}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="5" type="2" schemaName="cu_name" displayName="Name" parentSchemaName="cu_studentapplication" parentDisplayName="Student Application" solution="CUCore (1.0.0.2)" />
+        <Dependent key="1" type="60" displayName="Student Application Form" parentDisplayName="Student Application" id="{6f816d18-d6fc-e911-a812-000d3a34717b}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="6" type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
+        <Dependent key="3" type="80" schemaName="cu_Admissions" displayName="Admissions" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>
