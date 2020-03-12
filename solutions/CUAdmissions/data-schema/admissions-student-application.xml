@@ -1,10 +1,11 @@
 <entities >
   <entity name="cu_studentapplication" displayname="Student Application" etc="10083" primaryidfield="cu_studentapplicationid" primarynamefield="cu_name" disableplugins="false">
     <fields>
-      <field displayname="Name" name="cu_name" type="string" customfield="true" />
-      <field displayname="Created On" name="createdon" type="datetime" />
-      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
       <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Application Status" name="cu_applicationstatus" type="optionsetvalue" customfield="true" />
+      <field displayname="Name" name="cu_name" type="string" customfield="true" />
+      <field displayname="Student Application" name="cu_studentapplicationid" type="guid" primaryKey="true" />
     </fields>
   </entity>
 </entities>

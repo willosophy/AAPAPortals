@@ -1,12 +1,27 @@
 [CmdletBinding()]
 param (
-    $serverUrl,
-    $userName,
-    $userPassword,
-    $dataFile
+    [Parameter(Mandatory = $True)]
+    [String]$serverUrl,
+    [Parameter(Mandatory = $True)]
+    [String]$userName,
+    [Parameter(Mandatory = $True)]
+    [String]$userPassword,
+
+    [Parameter(Mandatory = $True)]
+    #[ValidateScript( { [System.IO.Path]::IsPathRooted($_) })]
+    [String]$dataFile,
+
+    [Parameter(Mandatory = $false)]
+    #[ValidateScript( { [System.IO.Path]::IsPathRooted($_) })]
+    [String]$schemaFile = $null
 )
 
-Write-Host "Importing data from $($dataFile) to $($serverUrl)"
+if ([string]::IsNullOrEmpty($schemaFile)) {
+    Write-Host "Importing data from $($dataFile) to $($serverUrl)" 
+}
+else {
+    Write-Host "Exporting data from $($dataFile) to $($serverUrl)"
+}
 
 if (Get-Module -ListAvailable -Name Microsoft.Xrm.Data.PowerShell ) {
     Write-Host "Microsoft.Xrm.Data.PowerShell module exists skipping install."
@@ -35,5 +50,13 @@ else {
 $connection = Connect-CrmOnline -ServerUrl $serverUrl -Credential $credOject
 Write-Host "Now connected to $($connection.ConnectedOrgFriendlyName)"
 
-Write-Host "Beginning data import..."
-Import-CrmDataFile -CrmConnection $connection -DataFile $dataFile -Verbose
+if ([string]::IsNullOrEmpty($schemaFile)) {
+    Write-Host "Beginning data import..."
+    Import-CrmDataFile -CrmConnection $connection -DataFile $dataFile -Verbose
+}
+else {
+    Write-Host "Beginning data export..."
+    Export-CrmDataFile -CrmConnection $connection -DataFile $dataFile -Verbose -SchemaFile $schemaFile -EmitLogToConsole
+}
+
+

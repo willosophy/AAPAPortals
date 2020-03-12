@@ -13,15 +13,17 @@ jobs:
     - task: PowerAppsToolInstaller@0
 
     - ${{ each solution in parameters.solutions }}:
-      - task: PowerAppsImportSolution@0
-        inputs:
-          PowerAppsEnvironment: ${{ parameters.powerappsEnvironment }}
-          SolutionInputFile: ${{ solution.directory }}/${{ solution.name }}
-          AsyncOperation: true
-          MaxAsyncWaitTime: '240'
-        displayName: Import ${{ solution.name }} solution
+      - ${{ if ne(solution.name, '') }}:
+        - task: PowerAppsImportSolution@0
+          inputs:
+            PowerAppsEnvironment: ${{ parameters.powerappsEnvironment }}
+            SolutionInputFile: ${{ solution.directory }}/${{ solution.name }}
+            AsyncOperation: true
+            MaxAsyncWaitTime: '240'
+          displayName: Import ${{ solution.name }} solution
       - ${{ each datafile in solution.dataFiles }}:
-        - template: ../steps/import-data.yml
+        # Import from static file
+        - template: ../steps/configuration-migration.yml
           parameters:
             dataFile: ${{ datafile }}
             userName: ${{ parameters.userName }}

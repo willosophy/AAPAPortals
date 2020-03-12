@@ -10,18 +10,24 @@ trigger:
       - "solutions/CUAdmissions"
 
 stages:
-  - template: ../stages/build-and-release.yml
+  - template: ../stages/build-managed.yml
     parameters: 
       SolutionContentDirectory: "solutions/CUAdmissions/content"
       SolutionName: "CUAdmissions"
-      TargetEnvironment: "release-target"
+      TargetEnvironment: $(powerAppsEnvironment)
+  - template: ../stages/release-managed.yml
+    parameters: 
+      SolutionContentDirectory: "solutions/CUAdmissions/content"
+      SolutionName: "CUAdmissions"
+      TargetEnvironment: $(powerAppsEnvironment)
   - stage: Import_Config_Data
     jobs:
       - job:
         pool:
           vmimage: 'vs2017-win2016'
         steps:
-        - template: ../steps/import-data.yml
+        # Import from static file
+        - template: ../steps/configuration-migration.yml
           parameters:
             userName: $(userName)
             userPassword: $(userPassword)

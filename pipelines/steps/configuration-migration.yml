@@ -1,0 +1,21 @@
+  parameters:
+    userName: ''
+    userPassword: ''
+    serverUrl: ''
+    dataFile: ''
+    schemaFile: ''
+
+  steps:
+    - ${{ if ne(parameters.schemaFile, '') }}:
+      - task: PowerShell@2
+        inputs:
+          filePath: '$(Build.SourcesDirectory)\pipelines\powershell\configuration-migration.ps1'
+          arguments: '-userName ${{ parameters.userName }} -userPassword ${{ parameters.userPassword }} -serverUrl ${{ parameters.serverUrl }} -dataFile ${{ parameters.datafile }} -schemaFile ${{ parameters.schemaFile }}'
+        displayName: Export data from ${{ parameters.dataFile }}
+
+    - ${{ if eq(parameters.schemaFile, '') }}:
+      - task: PowerShell@2
+        inputs:
+          filePath: '$(Build.SourcesDirectory)\pipelines\powershell\configuration-migration.ps1'
+          arguments: '-userName ${{ parameters.userName }} -userPassword ${{ parameters.userPassword }} -serverUrl ${{ parameters.serverUrl }} -dataFile ${{ parameters.datafile }}'
+        displayName: Import data from ${{ parameters.dataFile }}

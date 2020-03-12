@@ -12,7 +12,8 @@ stages:
           ArtifactName: ${{ variables.ArtifactName }}
           Environment: $(Environment)
           SolutionName: ${{ variables.SolutionName }}
-  - stage: Commit_Solutions
+  ## Export data if schema file exists and commit with solution
+  - stage: Commit_Solution
     dependsOn: Export_Solutions
     jobs:
       - template: ../jobs/solution-unpack/solution-unpack-commit.yml

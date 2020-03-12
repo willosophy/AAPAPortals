@@ -4,28 +4,6 @@ parameters:
   TargetEnvironment: ""
 
 stages:
-  - stage: Build
-
-    jobs:
-      - job:
-        displayName: "Build managed solution"
-
-        pool:
-          vmImage: "vs2017-win2016"
-
-        steps:
-          - task: PowerAppsToolInstaller@0
-
-          - task: PowerAppsPackSolution@0
-            inputs:
-              SolutionSourceFolder: '$(Build.SourcesDirectory)\${{ parameters.SolutionContentDirectory }}'
-              SolutionOutputFile: '$(Pipeline.Workspace)\managed-solutions\${{ parameters.solutionName }}_managed.zip'
-              SolutionType: Managed
-
-          - publish: $(Pipeline.Workspace)\managed-solutions
-            artifact: solution-artifacts
-            displayName: Publish pipeline artifact - ${{ parameters.solutionName }}_managed.zip
-
   - stage: Release
 
     jobs:
