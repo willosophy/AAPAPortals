@@ -4,25 +4,13 @@ parameters:
     TargetEnvironment: ""
   
 stages:
-    - stage: Build_${{ parameters.TargetEnvironment }}
-  
-      jobs:
-        - job:
-          displayName: "Build unmanaged solution"
-  
-          pool:
-            vmImage: "vs2017-win2016"
-  
-          steps:
-          - task: PowerAppsToolInstaller@0
-  
-          - task: PowerAppsPackSolution@0
-            inputs:
-              SolutionSourceFolder: '$(Build.SourcesDirectory)\${{ parameters.SolutionContentDirectory }}'
-              SolutionOutputFile: '$(Pipeline.Workspace)\unmanaged-solutions\${{ parameters.solutionName }}.zip'
-              SolutionType: Unmanaged
-  
-          - publish: $(Pipeline.Workspace)\unmanaged-solutions
-            artifact: solution-artifacts
-            displayName: Publish pipeline artifact - ${{ parameters.solutionName }}.zip
+  - stage: Build_${{ parameters.SolutionName }}
+
+    jobs:
+      - template: ../jobs/build/build-solution.yml
+        parameters:
+          SolutionContentDirectory: ${{ parameters.SolutionContentDirectory }}
+          SolutionName: ${{ parameters.SolutionName }}
+          TargetEnvironment: ${{ parameters.TargetEnvironment }}
+          SolutionType: "Unmanaged"
   

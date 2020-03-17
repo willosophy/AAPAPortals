@@ -12,11 +12,11 @@ trigger:
 stages:
   - template: ../stages/build-managed.yml
     parameters: 
-      SolutionContentDirectory: "solutions/CUCore/content"
+      SolutionContentDirectory: "solutions\\CUCore\\content"
       SolutionName: "CUCore"
       TargetEnvironment: $(powerAppsEnvironment)
   - template: ../stages/release-managed.yml
     parameters: 
-      SolutionContentDirectory: "solutions/CUCore/content"
+      SolutionContentDirectory: "solutions\\CUCore\\content"
       SolutionName: "CUCore"
       TargetEnvironment: $(powerAppsEnvironment)

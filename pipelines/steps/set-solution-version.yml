@@ -1,0 +1,9 @@
+parameters:
+  SolutionContentDirectory: ''
+
+steps:
+  - task: PowerShell@2
+    inputs:
+      filePath: '$(Build.SourcesDirectory)\pipelines\powershell\set-solution-version.ps1'
+      arguments: '-solutionXmlFullPath $(Build.SourcesDirectory)\${{ parameters.SolutionContentDirectory }}\Other\Solution.xml'
+    displayName: Set solution version number

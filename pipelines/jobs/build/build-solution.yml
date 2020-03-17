@@ -1,0 +1,36 @@
+parameters:
+  SolutionContentDirectory: ""
+  SolutionName: ""
+  TargetEnvironment: ""
+  SolutionType: ""
+
+jobs:
+  - job:
+    displayName: "Build managed solution"
+
+    pool:
+      vmImage: "vs2017-win2016"
+
+    steps:
+      - task: PowerAppsToolInstaller@0
+
+      - template: ../../steps/set-solution-version.yml
+        parameters: 
+          SolutionContentDirectory: ${{ parameters.SolutionContentDirectory }}
+
+      - task: PowerAppsPackSolution@0
+        inputs:
+          SolutionSourceFolder: '$(Build.SourcesDirectory)\${{ parameters.SolutionContentDirectory }}'
+          ${{ if eq(parameters.SolutionType, 'managed') }}:
+            SolutionOutputFile: '$(Pipeline.Workspace)\managed-solutions\${{ parameters.solutionName }}_managed.zip'
+            SolutionType: Managed
+          ${{ if eq(parameters.SolutionType, 'Unmanaged') }}:
+            SolutionOutputFile: '$(Pipeline.Workspace)\managed-solutions\${{ parameters.solutionName }}.zip'
+            SolutionType: Unmanaged
+
+      - publish: $(Pipeline.Workspace)\managed-solutions
+        artifact: solution-artifacts
+        ${{ if eq(parameters.SolutionType, 'managed') }}:
+          displayName: Publish pipeline artifact - ${{ parameters.solutionName }}_managed.zip
+        ${{ if eq(parameters.SolutionType, 'Unmanaged') }}:
+          displayName: Publish pipeline artifact - ${{ parameters.solutionName }}.zip

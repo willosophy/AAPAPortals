@@ -12,12 +12,12 @@ trigger:
 stages:
   - template: ../stages/build-managed.yml
     parameters: 
-      SolutionContentDirectory: "solutions/CUAdmissions/content"
+      SolutionContentDirectory: "solutions\\CUAdmissions\\content"
       SolutionName: "CUAdmissions"
       TargetEnvironment: $(powerAppsEnvironment)
   - template: ../stages/release-managed.yml
     parameters: 
-      SolutionContentDirectory: "solutions/CUAdmissions/content"
+      SolutionContentDirectory: "solutions\\CUAdmissions\\content"
       SolutionName: "CUAdmissions"
       TargetEnvironment: $(powerAppsEnvironment)
   - stage: Import_Config_Data

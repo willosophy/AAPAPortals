@@ -1,0 +1,38 @@
+# Release via job to allow for parallel processing.
+# E.g. Syncing Core solution developed in isolation. Export Core from its isolated development environment, check 
+# in to source and deploy to all other development environments as managed to ensure all have the latest copy.
+
+parameters:
+  SolutionContentDirectory: ""
+  SolutionName: ""
+  TargetEnvironment: ""
+  SolutionType: ""
+
+jobs:
+  # track deployments on the environment
+  - deployment: Deploy_To_${{ parameters.TargetEnvironment }}
+    displayName: Deploy managed solution to ${{ parameters.TargetEnvironment }}
+    pool:
+      vmImage: "vs2017-win2016"
+
+    # Automatically creates an environment in Azure DevOps with the name of the target environment
+    # Allows tracking of deployments to that environment and enabling checks to gate deployments
+    environment: ${{ parameters.TargetEnvironment }}
+
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            # Artifact download happens automatically in a deployment job
+
+            - task: PowerAppsToolInstaller@0
+
+            - task: PowerAppsImportSolution@0
+              inputs:
+                PowerAppsEnvironment: "${{ parameters.TargetEnvironment }}"                
+                AsyncOperation: true
+                MaxAsyncWaitTime: "240"
+                ${{ if eq(parameters.SolutionType, 'Managed') }}:
+                  SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\${{ parameters.solutionName }}_managed.zip'
+                ${{ if eq(parameters.SolutionType, 'Unmanaged') }}:
+                  SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\${{ parameters.solutionName }}.zip'

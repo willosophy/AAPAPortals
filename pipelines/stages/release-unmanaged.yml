@@ -4,30 +4,12 @@ parameters:
     TargetEnvironment: ""
 
 stages:
-  - stage: Release_${{ parameters.TargetEnvironment }}
+  - stage: Release_To_${{ parameters.TargetEnvironment }}
 
     jobs:
-    # track deployments on the environment
-    - deployment: Release
-      displayName: Release unmanaged solution to ${{ parameters.TargetEnvironment }}
-      pool:
-        vmImage: "vs2017-win2016"
-
-        # Automatically creates an environment in Azure DevOps with the name of the target environment
-        # Allows tracking of deployments to that environment and enabling checks to gate deployments
-      environment: Test
-
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            # Artifact download happens automatically in a deployment job
-
-            - task: PowerAppsToolInstaller@0
-
-            - task: PowerAppsImportSolution@0
-              inputs:
-                PowerAppsEnvironment: "${{ parameters.TargetEnvironment }}"
-                SolutionInputFile: '$(Pipeline.Workspace)\solution-artifacts\${{ parameters.solutionName }}.zip'
-                AsyncOperation: true
-                MaxAsyncWaitTime: "240"
+      - template: ../jobs/release/release-solution.yml
+        parameters:
+          SolutionContentDirectory: ${{ parameters.SolutionContentDirectory }}
+          SolutionName: ${{ parameters.SolutionName }}
+          TargetEnvironment: ${{ parameters.TargetEnvironment }}
+          SolutionType: "Unmanaged"
