@@ -15,7 +15,7 @@ steps:
 - task: PowerAppsPackSolution@0
   inputs:
     SolutionSourceFolder: 'solutions\CUCore\content'
-    SolutionOutputFile: '$(Pipeline.Workspace)/packed-solutions'
+    SolutionOutputFile: '$(Pipeline.Workspace)/packed-solutions/core.zip'
 
 - publish: $(Pipeline.Workspace)/packed-solutions
   artifact: solution-artifact
