@@ -6,16 +6,29 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'vs2017-win2016'
+stages:
+- stage: Build
+  jobs:
 
-steps:
-- task: PowerAppsToolInstaller@0
+  - job: BuildJob
+  
+    pool:
+      vmImage: 'vs2017-win2016'
 
-- task: PowerAppsPackSolution@0
-  inputs:
-    SolutionSourceFolder: 'solutions\CUCore\content'
-    SolutionOutputFile: '$(Pipeline.Workspace)/packed-solutions/core.zip'
+    steps:
+    - task: PowerAppsToolInstaller@0
 
-- publish: $(Pipeline.Workspace)/packed-solutions
-  artifact: solution-artifact
+    - task: PowerAppsPackSolution@0
+      inputs:
+        SolutionSourceFolder: 'solutions\CUCore\content'
+        SolutionOutputFile: '$(Pipeline.Workspace)/packed-solutions/core.zip'
+
+    # Published to Azure pipeline artifacts 
+    - publish: $(Pipeline.Workspace)/packed-solutions
+      artifact: solution-artifact
+
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    steps:
+    - script: echo Deploying the code!
