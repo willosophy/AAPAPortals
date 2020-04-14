@@ -22,13 +22,35 @@ stages:
       inputs:
         SolutionSourceFolder: 'solutions\CUCore\content'
         SolutionOutputFile: '$(Pipeline.Workspace)/packed-solutions/core.zip'
+        SolutionType: Managed
 
     # Published to Azure pipeline artifacts 
     - publish: $(Pipeline.Workspace)/packed-solutions
       artifact: solution-artifact
 
 - stage: Deploy
+  displayName: "Deploy solution"
   jobs:
-  - job: Deploy
-    steps:
-    - script: echo Deploying the code!
+    # track deployments on the environment
+  - deployment: DeploySolution
+    displayName: "Deploy my solution"
+    pool:
+      vmImage: 'vs2017-win2016'
+    # creates an environment if it doesn't exist
+    environment: 'CU-Admission'
+    strategy:
+      # default deployment strategy, more coming...
+      runOnce:
+        deploy:
+          steps:
+          # Artifacts are automically downlaoded in a deployment job
+          - task: PowerAppsToolInstaller@0
+     
+          - task: PowerAppsImportSolution@0
+            inputs:
+              PowerAppsEnvironment: 'admissions_dev'
+              SolutionInputFile: '$(Pipeline.Workspace)/solution-artifact/core.zip'
+              AsyncOperation: true
+              MaxAsyncWaitTime: '240'
+
+
