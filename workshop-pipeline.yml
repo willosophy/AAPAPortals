@@ -28,7 +28,7 @@ stages:
     - publish: $(Pipeline.Workspace)/packed-solutions
       artifact: solution-artifact
 
-- stage: Deploy
+- stage: Deploy_$(test)
   displayName: "Deploy solution"
   jobs:
     # track deployments on the environment
